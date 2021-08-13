@@ -1,0 +1,32 @@
+{
+    "variables": {
+        "access_key": "{{env `ACCESS_KEY`}}",
+        "secret_key": "{{env `SECRET_KEY`}}",
+        "description": "eng89_prathima_packer_myWebServer"
+    },
+    "builders":[
+        {
+            "type":"amazon-ebs", 
+            "access_key": "{{user `access_key`}}",
+            "secret_key": "{{user `secret_key`}}",
+            "region": "eu-west-1",
+            "ami_name": "{{user `description`}}",
+            "source_ami": "ami-038d7b856fe7557b3",
+            "instance_type": "t2.micro",
+            "ssh_username": "ubuntu"
+        }
+    ],
+    "provisioners":[
+        {
+            "type": "shell",
+            "script": "setup.sh"
+        }
+    ],
+    "sensitive-variables": ["access_key", "secret_key"],
+    "post-processors": [
+        {
+            "type": "manifest",
+            "output":"{{user `description`}}.json"
+        }
+    ]
+}
