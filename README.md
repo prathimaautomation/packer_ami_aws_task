@@ -1,4 +1,4 @@
-#Packer to build an AMI on AWS
+# Packer to build an AMI on AWS
 
 ## Step 1) Downloading and installing packer
 
